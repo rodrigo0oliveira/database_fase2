@@ -78,3 +78,14 @@ CREATE TABLE IF NOT EXISTS medico_especialidade (
     CONSTRAINT fk_mes_especialidade FOREIGN KEY (especialidade_id) REFERENCES especialidade(id)
 );
 
+ALTER TABLE pagamento_consulta
+ADD COLUMN paciente_id int,
+ADD CONSTRAINT fk_pagamento_paciente FOREIGN KEY (paciente_id)
+REFERENCES paciente(id);
+
+ALTER TABLE medico
+ALTER COLUMN endereco_id SET NOT NULL;
+
+ALTER TABLE paciente
+ALTER COLUMN endereco_id SET NOT NULL;
+
