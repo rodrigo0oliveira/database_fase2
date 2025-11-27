@@ -1,5 +1,6 @@
 package com.facisa.banco_fase2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -43,6 +44,10 @@ public class Consulta {
         this.realizado = realizado;
         this.medico = medico;
         this.paciente = paciente;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public BigDecimal getValor() {
