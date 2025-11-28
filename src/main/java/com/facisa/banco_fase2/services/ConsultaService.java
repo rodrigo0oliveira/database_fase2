@@ -12,17 +12,12 @@ import com.facisa.banco_fase2.repositories.consulta.ConsultaRepository;
 import com.facisa.banco_fase2.repositories.medico.MedicoRepository;
 import com.facisa.banco_fase2.repositories.paciente.PacienteRepository;
 import org.apache.coyote.BadRequestException;
-import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
