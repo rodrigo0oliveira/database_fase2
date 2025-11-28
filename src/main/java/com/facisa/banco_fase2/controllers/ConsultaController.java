@@ -52,7 +52,7 @@ public class ConsultaController {
         try {
             ResponseConsultaDto updated = consultaService.updateById(id, dto);
             return ResponseEntity.ok(updated);
-        } catch (BadRequestException e){
+        } catch (Exception e){
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }

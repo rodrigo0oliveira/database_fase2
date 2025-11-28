@@ -70,19 +70,39 @@ public class ConsultaService {
     }
 
     public ResponseConsultaDto updateById(Integer id, UpdateConsultaDto dto) throws BadRequestException {
-        Consulta consulta = consultaRepository.findById(id).orElseThrow(()-> new BadRequestException("Consulta nao encontrada!"));
+        try{
+            Consulta consulta = consultaRepository.findById(id).orElseThrow(()-> new BadRequestException("Consulta nao encontrada!"));
 
-        Medico medico = medicoRepository.findById(dto.medicoId()).orElseThrow(()-> new BadRequestException("Medico nao encontrado!"));
-        Paciente paciente = pacienteRepository.findById(dto.pacienteId()).orElseThrow(()-> new BadRequestException("Paciente nao encontrado!"));
-        Optional.of(paciente).ifPresent(consulta::setPaciente);
-        Optional.of(medico).ifPresent(consulta::setMedico);
-        Optional.of(Timestamp.valueOf(dto.dataHoraInicio())).ifPresent(consulta::setData_hora_inicio);
-        Optional.of(Timestamp.valueOf(dto.dataHoraFim())).ifPresent(consulta::setData_hora_fim);
-        Optional.ofNullable(dto.valor()).ifPresent(consulta::setValor);
+            if(dto.medicoId()!=null){
+                Medico medico = medicoRepository.findById(dto.medicoId()).orElseThrow(()-> new BadRequestException("Medico nao encontrado!"));
+                Optional.of(medico).ifPresent(consulta::setMedico);
+            }
+            if(dto.pacienteId()!=null){
+                Paciente paciente = pacienteRepository.findById(dto.pacienteId()).orElseThrow(()-> new BadRequestException("Paciente nao encontrado!"));
+                Optional.of(paciente).ifPresent(consulta::setPaciente);
+            }
 
-        Consulta updated = consultaRepository.save(consulta);
+            if(dto.dataHoraInicio()!=null){
+                Timestamp beginTimestamp = Timestamp.valueOf(dto.dataHoraInicio());
+                Optional.of(beginTimestamp).ifPresent(consulta::setData_hora_inicio);
+            }
 
-        return ConsultaMapper.toResponse(updated);
+            if(dto.dataHoraFim()!=null){
+                Timestamp endTimestamp = Timestamp.valueOf(dto.dataHoraFim());
+                Optional.of(endTimestamp).ifPresent(consulta::setData_hora_fim);
+            }
+
+            Optional.ofNullable(dto.valor()).ifPresent(consulta::setValor);
+
+            Consulta updated = consultaRepository.save(consulta);
+
+            return ConsultaMapper.toResponse(updated);
+        }catch(DataAccessException e){
+            throw new RuntimeException(e.getRootCause().getMessage());
+        }
+        catch (BadRequestException e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public void deleteById(Integer id){
