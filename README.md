@@ -20,16 +20,13 @@ Antes de rodar o projeto, você precisa ter instalado:
 ## 📥 Clonar o repositório
 
 ```
- git https://github.com/rodrigo0oliveira/database_fase2.git
-
+ git clone git https://github.com/rodrigo0oliveira/database_fase2.git
 ```
 ```
  cd database_fase2
-
 ```
 ```
  mvn spring-boot:run
-
 ```
 
 * Não é necessário realizar nenhum comando no sgbd além do create database, todas as tabelas,procedures,functions e triggers são criadas pelas migrations do Flyway.
