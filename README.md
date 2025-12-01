@@ -20,7 +20,7 @@ Antes de rodar o projeto, você precisa ter instalado:
 ## 📥 Clonar o repositório
 
 ```
- git clone git https://github.com/rodrigo0oliveira/database_fase2.git
+ git clone https://github.com/rodrigo0oliveira/database_fase2.git
 ```
 ```
  cd database_fase2
