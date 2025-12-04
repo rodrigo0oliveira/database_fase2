@@ -1,11 +1,10 @@
 package com.facisa.banco_fase2.runner;
 
-import com.facisa.banco_fase2.domain.Endereco;
-import com.facisa.banco_fase2.domain.Especialidade;
-import com.facisa.banco_fase2.domain.Medico;
-import com.facisa.banco_fase2.domain.Paciente;
+import com.facisa.banco_fase2.domain.*;
+import com.facisa.banco_fase2.repositories.consulta.ConsultaRepository;
 import com.facisa.banco_fase2.repositories.medico.MedicoRepository;
 import com.facisa.banco_fase2.repositories.paciente.PacienteRepository;
+import com.facisa.banco_fase2.repositories.pagamento_consulta.PagamentoConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -22,6 +21,12 @@ public class Runner implements CommandLineRunner {
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private ConsultaRepository consultaRepository;
+
+    @Autowired
+    private PagamentoConsultaRepository pagamentoConsultaRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,18 +47,18 @@ public class Runner implements CommandLineRunner {
                 "12345678901",
                 java.sql.Date.valueOf("1990-05-10"),
                 "81999999999",
-                "ana.silva@email.com"
+                "ana.silva@email.com",
+                e3
         );
-        p1.setEndereco(e3);
 
         Paciente p2 = new Paciente(
                 "Carlos Souza",
                 "98765432100",
                 java.sql.Date.valueOf("1985-08-22"),
                 "81988888888",
-                "carlos.souza@email.com"
+                "carlos.souza@email.com",
+                e4
         );
-        p2.setEndereco(e4);
 
         medicoRepository.saveAll(Arrays.asList(m1, m2));
         pacienteRepository.saveAll(Arrays.asList(p1, p2));
@@ -73,6 +78,8 @@ public class Runner implements CommandLineRunner {
     }
 
     private void cleanData(){
+        pagamentoConsultaRepository.deleteAll();
+        consultaRepository.deleteAll();
         medicoRepository.deleteAll();
         pacienteRepository.deleteAll();
     }

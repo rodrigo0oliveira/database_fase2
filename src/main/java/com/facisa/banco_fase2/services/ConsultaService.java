@@ -11,6 +11,8 @@ import com.facisa.banco_fase2.mappers.consulta.ConsultaRow;
 import com.facisa.banco_fase2.repositories.consulta.ConsultaRepository;
 import com.facisa.banco_fase2.repositories.medico.MedicoRepository;
 import com.facisa.banco_fase2.repositories.paciente.PacienteRepository;
+import com.facisa.banco_fase2.repositories.pagamento_consulta.PagamentoConsultaRepository;
+import jakarta.transaction.Transactional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -31,6 +33,9 @@ public class ConsultaService {
 
     @Autowired
     private  ConsultaRepository consultaRepository;
+
+    @Autowired
+    private PagamentoConsultaRepository pagamentoConsultaRepository;
 
     public ResponseConsultaDto createConsulta(ConsultaDto dto) {
         try{
@@ -105,7 +110,9 @@ public class ConsultaService {
         }
     }
 
+    @Transactional
     public void deleteById(Integer id){
+        pagamentoConsultaRepository.deleteByConsultaId(id);
         consultaRepository.deleteById(id);
     }
 

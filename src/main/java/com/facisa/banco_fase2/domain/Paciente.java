@@ -36,12 +36,13 @@ public class Paciente {
 
     public Paciente(){}
 
-    public Paciente(String nome, String cpf, Date data_nascimento, String telefone, String email) {
+    public Paciente(String nome, String cpf, Date data_nascimento, String telefone, String email,Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.data_nascimento = data_nascimento;
         this.telefone = telefone;
         this.email = email;
+        this.endereco = endereco;
     }
 
     public String getNome() {
