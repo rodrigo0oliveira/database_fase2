@@ -16,6 +16,8 @@ Antes de rodar o projeto, você precisa ter instalado:
   create database fase2_database
   
   ```
+
+  * Antes de rodar o projeto verificar as credenciais do postgres no application.properties, por padrão o usuário está postgres com senha postgres,mas pode alterar de acordo com o que está configurado seu banco de dados
   
 ## 📥 Clonar o repositório
 
