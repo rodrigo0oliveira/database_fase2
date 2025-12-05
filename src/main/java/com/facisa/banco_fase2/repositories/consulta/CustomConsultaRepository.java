@@ -13,6 +13,6 @@ public class CustomConsultaRepository {
     public void callProcedureFinalizaConsulta(Integer id){
         em.createNativeQuery("CALL prc_finaliza_consulta(:id)")
                 .setParameter("id", id)
-                .executeUpdate(); // INSERT/UPDATE sem precisar de retorno
+                .executeUpdate();
     }
 }
